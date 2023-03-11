@@ -1,14 +1,14 @@
 <div class="template">
-  <h3 style="margin-top: 0.5em;min-height: 1em;">Add Car</h3>
+  <h3 style="margin-top: 0.5em; min-height: 1em">Add Car</h3>
   <hr />
   <div>
-    <form id="form" style="max-width: 800px;">
+    <form id="form" style="max-width: 800px">
       <div class="row">
         <div class="col-md-2">
           <label for="brand">Brand</label>
         </div>
         <div class="col-md-10">
-          <input id="brand" required>
+          <input id="brand" class="add-car-input" placeholder="Please enter brand..."/>
         </div>
       </div>
       <div class="row">
@@ -16,7 +16,7 @@
           <label for="model">Model</label>
         </div>
         <div class="col-md-10">
-          <input id="model" required>
+          <input id="model" class="add-car-input" placeholder="Please enter model..."/>
         </div>
       </div>
       <div class="row">
@@ -24,24 +24,30 @@
           <label for="model">price (day)</label>
         </div>
         <div class="col-md-4">
-          <input type=number id="price-pr-day" required>
+          <input type="number" id="price-pr-day" class="add-car-input" placeholder="Please enter price pr day..."/>
         </div>
         <div class="col-md-2">
-          <label for="best-discount">
-            Best discount
-          </label>
+          <label for="best-discount"> Best discount </label>
         </div>
         <div class="col-md-4">
-          <input type=number id="best-discount">
+          <input type="number" id="best-discount" class="add-car-input" placeholder="Please enter best discount...."/>
         </div>
       </div>
+      <div class="row"></div>
+      <p id="status" style="min-height: 1em"></p>
       <div class="row">
-
-      </div>
-      <div class="row">
-        <p id="status" style="min-height: 1em;margin-top:0.5em;"> </p>
-        <div style="margin-top:2em;">
-          <button id="btn-submit-car" class="btn btn-dark">Submit new car</button>
+        <p id="status" style="min-height: 1em; margin-top: 0.5em"></p>
+        <div class="row" style="margin-top: 2em">
+          <div class="col-md-3">
+            <button id="btn-submit-car" class="btn btn-dark">
+              Submit new car
+            </button>
+          </div>
+          <div class="col-md-3">
+            <button id="btn-clear" class="btn btn-dark" style="display: none">
+              Clear Form
+            </button>
+          </div>
         </div>
       </div>
     </form>

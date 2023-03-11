@@ -19,3 +19,17 @@ Styles used for labels and input fields in boot strap columns
   border: 1px solid lightgray;
 }
 
+thead {
+  position: sticky;
+  top: 0;
+  background-color: #1c2237;
+  color: #fff;
+}
+
+input.invalid {
+  border-color: red;
+}
+.invalid {
+  border: 1px solid red;
+}
+

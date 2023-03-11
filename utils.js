@@ -83,6 +83,11 @@ export function sanitizeStringWithTableRows(tableRows) {
   return secureRows
 }
 
+export function sanitizeString(string) {
+  let secureString = DOMPurify.sanitize(string)
+  return secureString;
+}
+
 
 /**
  * HINT --> USE DOMPurify.santitize(..) instead, to sanitize a full string of tags to be inserted via innerHTLM
