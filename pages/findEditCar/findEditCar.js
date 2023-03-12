@@ -9,6 +9,7 @@ export async function initFindEditCar() {
   document.getElementById("btn-fetch-car").onclick = getCarData;
   document.getElementById("btn-delete-car").onclick = deleteCar;
   document.getElementById("btn-submit-edited-car").onclick = updateCar;
+  document.getElementById("data").style.display = "none";
 
   const id = document.getElementById("car-id-input");
 

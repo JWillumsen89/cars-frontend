@@ -5,6 +5,7 @@ import { handleHttpErrors, encode } from "../../utils.js";
 const URL = `${API_URL}/members`;
 
 export async function initSignup() {
+  clearInput()
   document.getElementById("btn-submit-member").onclick = addMember;
   const inputFieldsAddMember = document.querySelectorAll(".add-member-input");
   const addMemberSuccessOrError = document.getElementById("status");

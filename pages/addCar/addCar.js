@@ -4,6 +4,7 @@ import { handleHttpErrors, encode } from "../../utils.js";
 const URL = `${API_URL}/cars`;
 
 export async function initAddCar(match) {
+  clearInput()
   document.getElementById("btn-submit-car").onclick = addCar;
   const inputFieldsAddCar = document.querySelectorAll(".add-car-input");
   const addCarSuccessOrError = document.getElementById("status");
