@@ -161,6 +161,8 @@ async function createReservation(modal) {
     resStatus.style.display = "block";
     resStatus.style.color = "green";
     resStatus.innerText = `Reservation for car with id: ${reservation.carId} on ${reservation.rentalDate} for ${reservation.username} was successfully created`;
+    date.value = "";
+    username.value = "";
     console.log("Reservation created");
   } catch (err) {
     console.error("Error:", err.message);
