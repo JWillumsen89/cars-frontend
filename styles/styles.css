@@ -22,7 +22,7 @@ Styles used for labels and input fields in boot strap columns
 thead {
   position: sticky;
   top: 0;
-  background-color: #1c2237;
+  background-color: #343a40;
   color: #fff;
 }
 
@@ -51,4 +51,12 @@ input.invalid {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btn {
+  background-color: #343a40;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #dfe1e4;
 }
