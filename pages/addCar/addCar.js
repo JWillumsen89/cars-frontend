@@ -1,5 +1,5 @@
 import { API_URL, FETCH_NO_API_ERROR } from "../../settings.js";
-import { handleHttpErrors } from "../../utils.js";
+import { handleHttpErrors, sanitizeString } from "../../utils.js";
 //Add id to this URL to get a single user
 const URL = `${API_URL}/cars`;
 
@@ -23,16 +23,15 @@ export async function initAddCar(match) {
 
 function clearInput() {
   const clearBtn = document.getElementById("btn-clear");
-  const addBrand = (document.getElementById("brand").value = "");
-  const addModel = (document.getElementById("model").value = "");
-  const addPrice = (document.getElementById("price-pr-day").value = "");
-  const addDiscount = (document.getElementById("best-discount").value = "");
+  const addBrand = document.getElementById("brand").value = "";
+  const addModel = document.getElementById("model").value = "";
+  const addPrice = document.getElementById("price-pr-day").value = "";
+  const addDiscount = document.getElementById("best-discount").value = "";
   removeInvalidFields();
   clearBtn.style.display = "none";
 }
 
 function removeInvalidFields() {
-  document.getElementById("status").style.display = "none";
   document.getElementById("brand").classList.remove("invalid");
   document.getElementById("model").classList.remove("invalid");
   document.getElementById("price-pr-day").classList.remove("invalid");
@@ -70,10 +69,10 @@ async function addCar() {
   addCarSuccessOrError.style.display = "none";
 
   const car = {
-    brand: addBrand.value,
-    model: addModel.value,
-    pricePrDay: addPrice.value,
-    bestDiscount: addDiscount.value,
+    brand: sanitizeString(addBrand.value),
+    model: sanitizeString(addModel.value),
+    pricePrDay: sanitizeString(addPrice.value),
+    bestDiscount: sanitizeString(addDiscount.value),
   };
   try {
     const response = await fetch(URL, {
@@ -87,9 +86,8 @@ async function addCar() {
       throw new Error("Failed to add car");
     }
 
-    // Clear input fields after adding the car
-
     console.log("New car has been added.");
+
     addCarSuccessOrError.style.display = "block";
     addCarSuccessOrError.style.color = "green";
     addCarSuccessOrError.style.fontWeight = "bold";

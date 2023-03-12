@@ -84,7 +84,7 @@ export function sanitizeStringWithTableRows(tableRows) {
 }
 
 export function sanitizeString(string) {
-  let secureString = DOMPurify.sanitize(string)
+  let secureString = string.replace(/<[^>]+>/g, '');
   return secureString;
 }
 

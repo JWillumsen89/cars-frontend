@@ -1,77 +1,86 @@
 <div class="template">
-
-  <h3 style="margin-top: 0.5em;min-height: 1em;">Sign up with Car's 'R' Us</h3>
+  <h3 style="margin-top: 0.5em; min-height: 1em">Sign up with Car's 'R' Us</h3>
   <hr />
   <div>
-    <form id="form" style="max-width: 900px;">
+    <form id="form" style="max-width: 900px">
       <div class="row">
-        <div class="col-md-2 ">
-          <label for="input-username">User Name</label>
+        <div class="col-md-2">
+          <label for="input-username">Username</label>
         </div>
         <div class="col-md-3">
-          <input id="input-username" required>
+          <input id="input-username" class="add-member-input" placeholder="Enter username..."/>
+          <p id="username-available" class="error-message" style="color: red; display: none;"></p>
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-2">
           <label for="input-email">Email</label>
         </div>
         <div class="col-md-5">
-          <input id="input-email" required>
+          <input id="input-email" type="email" class="add-member-input" placeholder="Enter email..."/>
+          <p id="email-available" class="error-message" style="color: red; display: none;"></p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2 ">
+        <div class="col-md-2">
           <label for="input-password">Password</label>
         </div>
         <div class="col-md-3">
-          <input type=password id="input-password" required>
+          <input type="password" id="input-password" class="add-member-input" placeholder="Enter password..."/>
+          <p id="password-requirements" class="error-message" style="color: red; display: none;"></p>
         </div>
       </div>
       <div class="row">
-        <div class="col-md-2 ">
+        <div class="col-md-2">
           <label for="input-firstname">First Name</label>
         </div>
         <div class="col-md-3">
-          <input id="input-firstname">
+          <input id="input-firstname" class="add-member-input" placeholder="Enter first name..."/>
         </div>
-        <div class="col-md-2 ">
+        <div class="col-md-2">
           <label for="input-lastname">Last Name</label>
         </div>
         <div class="col-md-5">
-          <input id="input-lastname" ">
+          <input id="input-lastname" class="add-member-input" placeholder="Enter last name..."/>
         </div>
       </div>
-      <div class=" row">
-          <div class="col-md-2 ">
-            <label for="input-street">Street</label>
+      <div class="row">
+        <div class="col-md-2">
+          <label for="input-street">Street</label>
+        </div>
+        <div class="col-md-10">
+          <input id="input-street" class="add-member-input" placeholder="Enter street..."/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-2">
+          <label class="col-md-2" for="input-city">City</label>
+        </div>
+        <div class="col-md-4">
+          <input id="input-city" class="add-member-input" placeholder="Enter city..."/>
+        </div>
+        <div class="col-md-1">
+          <label for="input-zip">Zip</label>
+        </div>
+        <div class="col-md-5">
+          <input id="input-zip" class="add-member-input" placeholder="Enter zip..."/>
+        </div>
+      </div>
+      <div class="row">
+        <p id="status" style="min-height: 1em; margin-top: 0.5em"></p>
+        <div class="row" style="margin-top: 2em">
+          <div class="col-md-3">
+            <button id="btn-submit-member" class="btn btn-dark">Sign Up</button>
+            &nbsp;
+            <a id="goto-login" href="/login" data-navigo style="display: none"
+              >Go to login?</a
+            >
           </div>
-          <div class="col-md-10">
-            <input id="input-street">
+          <div class="col-md-3">
+            <button id="btn-clear" class="btn btn-dark" style="display: none">
+              Clear Form
+            </button>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-2 ">
-            <label class="col-md-2" for="input-city">City</label>
-          </div>
-          <div class="col-md-4">
-            <input id="input-city">
-          </div>
-          <div class="col-md-1 ">
-            <label for="input-zip">Zip</label>
-          </div>
-          <div class="col-md-5">
-            <input id="input-zip">
-          </div>
-        </div>
-        <div class="row">
-          <p id="status" style="min-height: 1em;margin-top:0.5em"> </p>
-        </div>
-        <div class="row" style="margin-top:2em;">
-          <button id="btn-submit-car" class="btn btn-dark">Register</button>
-          &nbsp;
-          <a id="goto-login" href="/login" data-navigo style="display:none">Go to login?</a>
-        </div>
+      </div>
     </form>
-
-
   </div>
 </div>
