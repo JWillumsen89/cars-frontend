@@ -1,6 +1,6 @@
 import { API_URL } from "../../settings.js";
 import { initCars } from "../cars/cars.js";
-import { handleHttpErrors, sanitizeString } from "../../utils.js";
+import { handleHttpErrors, encode } from "../../utils.js";
 
 const URL = `${API_URL}/members`;
 
@@ -95,8 +95,7 @@ async function addMember() {
     return;
   }
 
-  
-  
+
   inputUsername.classList.remove("invalid");
   inputEmail.classList.remove("invalid");
   inputPassword.classList.remove("invalid");
@@ -110,14 +109,14 @@ async function addMember() {
   passwordRequirements.style.display = "none";
 
   const member = {
-    username: sanitizeString(inputUsername.value),
-    email: sanitizeString(inputEmail.value),
-    password: sanitizeString(inputPassword.value),
-    firstName: sanitizeString(inputFirstName.value),
-    lastName: sanitizeString(inputLastName.value),
-    street: sanitizeString(inputStreet.value),
-    city: sanitizeString(inputCity.value),
-    zip: sanitizeString(inputZip.value),
+    username: encode(inputUsername.value),
+    email: encode(inputEmail.value),
+    password: encode(inputPassword.value),
+    firstName: encode(inputFirstName.value),
+    lastName: encode(inputLastName.value),
+    street: encode(inputStreet.value),
+    city: encode(inputCity.value),
+    zip: encode(inputZip.value),
   };
 
   try {

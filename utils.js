@@ -83,11 +83,6 @@ export function sanitizeStringWithTableRows(tableRows) {
   return secureRows
 }
 
-export function sanitizeString(string) {
-  let secureString = string.replace(/<[^>]+>/g, '');
-  return secureString;
-}
-
 
 /**
  * HINT --> USE DOMPurify.santitize(..) instead, to sanitize a full string of tags to be inserted via innerHTLM
@@ -103,4 +98,16 @@ export function encode(str) {
   str = str.replace(/"/g, "&quot;");
   str = str.replace(/'/g, "&#039;");
   return str;
+}
+
+export function showLoading() {
+document.getElementById('loading').style.display = "block";
+}
+
+export function hideLoading() {
+  document.getElementById('loading').style.display = "none";
+}
+
+export function clearTable() {
+  document.getElementById("table-rows").innerHTML = "";
 }

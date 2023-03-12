@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { API_URL } from "../../settings.js";
-import { handleHttpErrors } from "../../utils.js";
+import { handleHttpErrors, showLoading, hideLoading } from "../../utils.js";
 
 //Add id to this URL to get a single user
 const URL = `${API_URL}/cars`;
@@ -21,7 +21,7 @@ export async function initFindEditCar() {
     document.getElementById("best-discount").value = "";
     document.getElementById("status").style.display = "none";
     id.classList.remove("invalid");
-    document.getElementById("data").style.display = 'none'
+    document.getElementById("data").style.display = "none";
   });
 }
 
@@ -38,23 +38,22 @@ async function getCarData() {
   }
 
   try {
+    showLoading()
+        // Add a delay of 1 seconds
+        await new Promise(resolve => setTimeout(resolve, 500));
     renderCar(id);
-    /* Make this work, navigo works
-    const queryString = "?id=" + id
-    //@ts-ignore  
-    window.router.navigate(`/${navigoRoute}${queryString}`, { callHandler: false, updateBrowserURL: true })
-    */
     showDataFieldsAndButtons();
   } catch (err) {
     console.log("Error Message: " + err.message);
     document.getElementById("error").innerText = err.message;
+  } finally {
+    hideLoading()
   }
 }
 
 function showDataFieldsAndButtons() {
-  document.getElementById("data").style.display = 'block'
+  document.getElementById("data").style.display = "block";
 }
-
 
 async function renderCar(id) {
   const carId = document.getElementById("car-id");

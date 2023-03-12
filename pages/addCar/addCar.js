@@ -1,5 +1,5 @@
 import { API_URL, FETCH_NO_API_ERROR } from "../../settings.js";
-import { handleHttpErrors, sanitizeString } from "../../utils.js";
+import { handleHttpErrors, encode } from "../../utils.js";
 //Add id to this URL to get a single user
 const URL = `${API_URL}/cars`;
 
@@ -69,10 +69,10 @@ async function addCar() {
   addCarSuccessOrError.style.display = "none";
 
   const car = {
-    brand: sanitizeString(addBrand.value),
-    model: sanitizeString(addModel.value),
-    pricePrDay: sanitizeString(addPrice.value),
-    bestDiscount: sanitizeString(addDiscount.value),
+    brand: encode(addBrand.value),
+    model: encode(addModel.value),
+    pricePrDay: encode(addPrice.value),
+    bestDiscount: encode(addDiscount.value),
   };
   try {
     const response = await fetch(URL, {

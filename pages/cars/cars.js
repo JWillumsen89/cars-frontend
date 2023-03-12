@@ -1,14 +1,20 @@
 import { API_URL } from "../../settings.js";
-import { handleHttpErrors, sanitizeStringWithTableRows } from "../../utils.js";
+import { handleHttpErrors, sanitizeStringWithTableRows,showLoading,hideLoading, clearTable } from "../../utils.js";
 //const URL = API_URL + "/cars/admin"
 const URL = API_URL + "/cars";
 
 export async function initCars() {
+  clearTable();
   try {
+    showLoading()
+    // Add a delay of 1 seconds
+    await new Promise(resolve => setTimeout(resolve, 500));
     const data = await fetch(URL).then((res) => res.json());
     showAllCars(data);
   } catch (err) {
     handleHttpErrors(err);
+  } finally {
+    hideLoading()
   }
 }
 

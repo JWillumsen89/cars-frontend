@@ -1,5 +1,6 @@
 <div class="template">
   <h2>Reserve Car</h2>
+  <p id="res-status" style="display: none;"></p>
   <table class="table" style="max-width: 1000px">
     <thead>
       <tr>
@@ -10,6 +11,7 @@
         <td>Reserve Car</td>
       </tr>
     </thead>
+    <div id="loading"></div>
     <tbody id="table-rows"></tbody>
   </table>
   <p id="error" style="margin-top: 0.5 em"></p>
@@ -37,17 +39,14 @@
         </div>
         <div class="modal-body">
           <div>
-            <p style="font-style: italic">
-              With security enabled, and if this requires a user to be logged
-              in, username is not necessary, since the server will know who the
-              currently logged in user is
+            <p id="price-pr-day-p">
             </p>
             <div class="row">
               <div class="col-md-3">
                 <label for="user-name">User name</label>
               </div>
               <div class="col-md-9">
-                <input id="user-name" placeholder="Enter your user name" />
+                <input id="user-name" placeholder="Enter your user name..." />
               </div>
             </div>
             <div class="row">
@@ -65,7 +64,7 @@
             <input hidden id="car-id" />
           </div>
           <br />
-          <p id="status">&nbsp;</p>
+          <p id="status" style="display: none;"></p>
         </div>
         <div class="modal-footer">
           <button

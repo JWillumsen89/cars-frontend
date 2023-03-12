@@ -1,13 +1,19 @@
 import { API_URL } from "../../settings.js";
-import { handleHttpErrors, sanitizeStringWithTableRows } from "../../utils.js";
+import { handleHttpErrors, sanitizeStringWithTableRows, showLoading, hideLoading, clearTable } from "../../utils.js";
 const URL = API_URL + "/members"
 
 export async function initMembers(){
+  clearTable()
   try {
+    showLoading()
+    // Add a delay of 1 seconds
+    await new Promise(resolve => setTimeout(resolve, 500));
     const data = await fetch(URL).then((res) => res.json());
     showAllMembers(data);
   } catch (err) {
     handleHttpErrors(err);
+  } finally {
+    hideLoading()
   }
 }
 
@@ -17,5 +23,5 @@ function showAllMembers(data) {
 </tr>`)
 
 const tableRowString = tableRowsArray.join("\n");
-document.getElementById("tbl-body").innerHTML = sanitizeStringWithTableRows(tableRowString);
+document.getElementById("table-rows").innerHTML = sanitizeStringWithTableRows(tableRowString);
 }
