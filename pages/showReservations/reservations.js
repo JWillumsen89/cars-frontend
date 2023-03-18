@@ -1,17 +1,22 @@
 import { API_URL } from "../../settings.js";
 import { sanitizeStringWithTableRows, showLoading, hideLoading } from "../../utils.js";
 
-const URL = API_URL + "/reservations";
+
+
+const URL = API_URL + "/reservations/";
 
 export async function initListReservationsAll() {
-
   clearTable();
+  const username = localStorage.getItem("user")
+  console.log(username)
+  const memberURL = URL + username;
+  console.log(memberURL)
   try {
     showLoading()
     // Add a delay of 1 seconds
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    const data = await fetch(URL).then((res) => res.json());
+    const data = await fetch(memberURL).then((res) => res.json());
     showAllReservations(data);
   } catch (err) {
     console.error(err);
@@ -27,7 +32,15 @@ function clearTable() {
 
 
 function showAllReservations(data) {
-  const tableRowsArray = data.map((reservation) => 
+
+  const convertDateString = (dateStr) => {
+    const [day, month, year] = dateStr.split("-");
+    return `${year}-${month}-${day}`;
+  };
+
+  const sortedList = data.sort((a, b) => new Date(convertDateString(a.rentalDate)).getTime() - new Date(convertDateString(b.rentalDate)).getTime());
+
+  const tableRowsArray = sortedList.map((reservation) => 
     `<tr>
       <td>${reservation.id}</td>
       <td>${reservation.carId}</td>
@@ -41,4 +54,7 @@ function showAllReservations(data) {
   document.getElementById("table-rows").innerHTML =
     sanitizeStringWithTableRows(tableRowString);
 }
+
+
+
 

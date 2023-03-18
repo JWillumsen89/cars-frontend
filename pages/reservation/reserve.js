@@ -15,16 +15,24 @@ export async function initReservation() {
   showAllCars();
   preventBackInTimeDate();
   document.getElementById("table-rows").onclick = setupReservationModal;
+  const resStatus = document.getElementById("res-status").innerHTML = "";
 }
 
 async function showAllCars() {
   clearTable();
+  const token = localStorage.getItem("token");
   try {
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     showLoading();
     // Add a delay of 1 seconds
     await new Promise((resolve) => setTimeout(resolve, 500));
 
-    const data = await fetch(URL).then((res) => res.json());
+    const data = await fetch(URL, options).then((res) => res.json());
     const tableRowsArray = data.map(
       (car) => `<tr>
       <td>${car.id}</td><td>${car.brand}</td><td>${car.model}</td><td>${car.pricePrDay}</td><td><button class="btn-reserve-car btn btn-dark" data-car-id="${car.id}">Add Reservation</button></td>
@@ -61,8 +69,15 @@ async function setupReservationModal(event) {
 }
 
 async function getCarInfo(id) {
+  const token = localStorage.getItem("token");
   try {
-    const car = await fetch(URL + "/" + id).then((res) => res.json());
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const car = await fetch(URL + "/" + id, options).then((res) => res.json());
     return car;
   } catch (err) {
     console.error(err);
@@ -94,23 +109,22 @@ function showModalWithCarInfo(carInfo) {
 
 async function createReservation(modal) {
   const carId = document.getElementById("car-id");
-  const username = document.getElementById("user-name");
+  const username = localStorage.getItem("user");
   const date = document.getElementById("reservation-date");
   const statusP = document.getElementById("status");
   const resStatus = document.getElementById("res-status");
+  console.log(username)
 
-  if (!username.value || !date.value) {
+  if (!date.value) {
     console.log("Missing input");
     statusP.style.display = "block";
     statusP.style.color = "red";
     statusP.style.fontWeight = "bold";
-    statusP.innerText = "Please fill out all fields";
-    username.classList.toggle("invalid", !username.value);
+    statusP.innerText = "Please fill out date";
     date.classList.toggle("invalid", !date.value);
     return;
   }
 
-  username.classList.remove("invalid");
   date.classList.remove("invalid");
 
   statusP.style.display = "none";
@@ -118,7 +132,7 @@ async function createReservation(modal) {
   const reservation = {
     rentalDate: date.value,
     carId: carId.value,
-    username: encode(username.value),
+    username: username,
   };
 
   try {
@@ -132,12 +146,7 @@ async function createReservation(modal) {
     if (!response.ok) {
       const errorData = await response.json();
 
-      if (errorData.message === "There is no member with that username") {
-        console.log(
-          "API Error - " + response.status + " - " + errorData.message
-        );
-        throw new Error(errorData.message);
-      } else if (
+      if (
         errorData.message ===
         "There is already a reservation for that car on that date."
       ) {
@@ -162,17 +171,11 @@ async function createReservation(modal) {
     resStatus.style.color = "green";
     resStatus.innerText = `Reservation for car with id: ${reservation.carId} on ${reservation.rentalDate} for ${reservation.username} was successfully created`;
     date.value = "";
-    username.value = "";
     console.log("Reservation created");
   } catch (err) {
     console.error("Error:", err.message);
     statusP.style.display = "block";
     statusP.innerText = err.message;
-
-    if (err.message.includes("There is no member with that username")) {
-      username.classList.toggle("invalid");
-      return;
-    }
 
     if (
       err.message.includes(

@@ -5,10 +5,17 @@ const URL = API_URL + "/members"
 export async function initMembers(){
   clearTable()
   try {
+    const token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     showLoading()
     // Add a delay of 1 seconds
     await new Promise(resolve => setTimeout(resolve, 500));
-    const data = await fetch(URL).then((res) => res.json());
+    const data = await fetch(URL, options).then((res) => res.json());
     showAllMembers(data);
   } catch (err) {
     handleHttpErrors(err);
