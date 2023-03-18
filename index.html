@@ -28,10 +28,10 @@
           <li class="nav-item active">
             <a class="nav-link" href="/" data-navigo>Home</a>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown admin-visibility" style="display: none;">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              Cars (A)
+              Cars
             </a>
             <ul class="dropdown-menu dropdown-menu-dark bg-dark" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/find-edit-car" data-navigo>Find/Edit Car</a></li>
@@ -42,18 +42,18 @@
               <li><a class="dropdown-item" href="/cars" data-navigo>All Cars</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/members" data-navigo>Members(A)</a>
+          <li class="nav-item admin-visibility" style="display: none;"">
+            <a class="nav-link" href="/members" data-navigo>Members</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" id="sign-up-btn">
             <a class="nav-link" href="/signup" data-navigo>Sign up</a>
           </li>
 
-          <li class="nav-item dropdown">
+          <li class="nav-item dropdown user-visibility" style="display: none;"">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
               aria-expanded="false">
-              Reservation (M)
+              Reservation
             </a>
             <ul class="dropdown-menu dropdown-menu-dark bg-dark" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/reserve-car" data-navigo>Reserve Cars</a></li>

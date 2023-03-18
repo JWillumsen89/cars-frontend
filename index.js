@@ -17,7 +17,7 @@ import { initLogin, logout } from "./pages/login/login.js";
 import { initSignup } from "./pages/signup/signup.js";
 import { initFindEditCar } from "./pages/findEditCar/findEditCar.js";
 import { initListReservationsAll } from "./pages/showReservations/reservations.js";
-import { setUserRole, isLoggedIn, checkIfLoggedIn } from "./auth.js";
+import { setUserRole, isLoggedIn, checkIfLoggedIn, checkWhatRoleAndChangeMenuVisibility } from "./auth.js";
 
 window.addEventListener("load", async () => {
   const templateCars = await loadHtml("./pages/cars/cars.html");
@@ -36,6 +36,7 @@ window.addEventListener("load", async () => {
 
   let roles = setUserRole();
   checkIfLoggedIn();
+  checkWhatRoleAndChangeMenuVisibility();
 
   adjustForMissingHash();
 
@@ -107,7 +108,7 @@ window.addEventListener("load", async () => {
         }
       },
       "/signup": () => {
-        if (roles) {
+        if (!isLoggedIn) {
           renderTemplate(templateSignup, "content");
           initSignup();
         } else {
