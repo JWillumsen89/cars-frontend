@@ -63,7 +63,14 @@ async function renderCar(id) {
   const carPrice = document.getElementById("price-pr-day");
   const carDiscount = document.getElementById("best-discount");
   try {
-    const car = await fetch(URL + "/" + id).then((res) => res.json());
+    const token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    const car = await fetch(URL + "/" + id, options).then((res) => res.json());
 
     document.getElementById("car-id-input").value = "";
 
@@ -128,10 +135,12 @@ async function updateCar() {
     bestDiscount: editDiscount.value,
   };
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(URL_WithID, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(car),
     });
@@ -169,8 +178,13 @@ async function deleteCar() {
   }
 
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(URL + "/" + id, {
       method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     if (!response.ok) {

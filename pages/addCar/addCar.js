@@ -76,16 +76,18 @@ async function addCar() {
     bestDiscount: encode(addDiscount.value),
   };
   try {
-    const response = await fetch(URL, {
+    const token = localStorage.getItem("token");
+    const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(car),
-    });
-    if (!response.ok) {
-      throw new Error("Failed to add car");
-    }
+    };
+    const response = await fetch(URL, options).then((res) =>
+      res.json()
+    );
 
     console.log("New car has been added.");
 

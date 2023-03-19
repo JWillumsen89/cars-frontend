@@ -8,15 +8,21 @@ const URL = API_URL + "/reservations/";
 export async function initListReservationsAll() {
   clearTable();
   const username = localStorage.getItem("user")
-  console.log(username)
   const memberURL = URL + username;
-  console.log(memberURL)
   try {
+
+    const token = localStorage.getItem("token");
+    const options = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
     showLoading()
     // Add a delay of 1 seconds
     await new Promise(resolve => setTimeout(resolve, 500));
 
-    const data = await fetch(memberURL).then((res) => res.json());
+    const data = await fetch(memberURL, options).then((res) => res.json());
     showAllReservations(data);
   } catch (err) {
     console.error(err);

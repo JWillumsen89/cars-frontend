@@ -136,10 +136,12 @@ async function createReservation(modal) {
   };
 
   try {
+    const token = localStorage.getItem("token");
     const response = await fetch(reservationURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(reservation),
     });
